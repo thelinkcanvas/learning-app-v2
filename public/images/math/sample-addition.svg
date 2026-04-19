@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <!-- Background -->
+  <rect width="1280" height="800" fill="#f0f9ff"/>
+
+  <!-- Title -->
+  <text x="640" y="80" font-size="48" font-weight="bold" text-anchor="middle" fill="#1e40af">
+    足し算を練習しよう！
+  </text>
+
+  <!-- Problem box -->
+  <rect x="340" y="200" width="600" height="300" fill="#dbeafe" stroke="#0284c7" stroke-width="3" rx="10"/>
+
+  <!-- Problem text -->
+  <text x="640" y="350" font-size="96" font-weight="bold" text-anchor="middle" fill="#1e40af">
+    23 + 15 = ?
+  </text>
+
+  <!-- Hint area -->
+  <text x="100" y="650" font-size="32" fill="#4b5563">
+    💡 ヒント： 一の位から足しましょう
+  </text>
+</svg>
