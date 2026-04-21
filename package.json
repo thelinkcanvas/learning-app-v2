@@ -11,7 +11,11 @@
     "generate-report": "tsx scripts/generate-report.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "batch:daily": "tsx scripts/batch-analysis.ts daily",
+    "batch:weekly": "tsx scripts/batch-analysis.ts weekly",
+    "batch:cost": "tsx scripts/batch-analysis.ts cost",
+    "batch:help": "tsx scripts/batch-analysis.ts help"
   },
   "dependencies": {
     "next": "16.2.4",
