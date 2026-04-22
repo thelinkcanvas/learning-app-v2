@@ -196,7 +196,7 @@ describe('callGeminiAnalysis', () => {
     await callGeminiAnalysis('prompt', 'system', { type: 'object' });
 
     const [url, init] = fetchSpy.mock.calls[0];
-    expect(url).toContain('gemini-3.1-flash');
+    expect(url).toContain('gemini-3.1-flash-preview');
     const body = JSON.parse((init as RequestInit).body as string);
     expect(body.generationConfig.temperature).toBe(0.3);
     expect(body.generationConfig.maxOutputTokens).toBe(2048);

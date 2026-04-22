@@ -224,7 +224,7 @@ export async function callGeminiAnalysis<T>(
     throw new Error('NEXT_PUBLIC_GEMINI_API_KEY is not set');
   }
 
-  const model = options.model ?? 'gemini-3.1-flash';
+  const model = options.model ?? 'gemini-3.1-flash-preview';
   const temperature = options.temperature ?? 0.3; // 分析は低温度で一貫性重視
   const maxOutputTokens = options.maxOutputTokens ?? 2048;
 
