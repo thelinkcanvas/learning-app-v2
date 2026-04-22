@@ -120,7 +120,7 @@ export default function ChatPane({ subject }: ChatPaneProps) {
           onKeyPress={handleKeyPress}
           placeholder="質問を入力..."
           disabled={isLoading}
-          className="flex-1 px-4 py-3 md:py-4 text-base md:text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 transition"
+          className="flex-1 px-4 py-3 md:py-4 text-base md:text-lg text-gray-900 placeholder:text-gray-500 border-2 border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 transition"
         />
         <button
           onClick={handleSendMessage}
