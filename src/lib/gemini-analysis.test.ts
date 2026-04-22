@@ -190,13 +190,13 @@ describe('callGeminiAnalysis', () => {
     expect(body.generationConfig.responseMimeType).toBe('application/json');
   });
 
-  it('デフォルト値：gemini-3.1-flash, temperature=0.3, maxTokens=2048', async () => {
+  it('デフォルト値：gemini-2.5-flash, temperature=0.3, maxTokens=2048', async () => {
     fetchSpy.mockResolvedValueOnce(mockGeminiResponse({ ok: true }));
 
     await callGeminiAnalysis('prompt', 'system', { type: 'object' });
 
     const [url, init] = fetchSpy.mock.calls[0];
-    expect(url).toContain('gemini-3.1-flash-preview');
+    expect(url).toContain('gemini-2.5-flash');
     const body = JSON.parse((init as RequestInit).body as string);
     expect(body.generationConfig.temperature).toBe(0.3);
     expect(body.generationConfig.maxOutputTokens).toBe(2048);
