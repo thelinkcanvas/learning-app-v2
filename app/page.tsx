@@ -18,7 +18,7 @@ export default function Home() {
         </div>
 
         {/* Subject Grid - Responsive */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
           {subjects.map((subject) => (
             <Link
               key={subject.id}
@@ -32,6 +32,20 @@ export default function Home() {
             </Link>
           ))}
         </div>
+
+        {/* Weekly Analytics Button */}
+        <Link
+          href="/analytics/weekly"
+          className="block w-full bg-white hover:bg-indigo-50 border-2 border-indigo-200 hover:border-indigo-400 rounded-xl p-5 md:p-6 text-center shadow-md transition-all transform hover:scale-105 mb-6"
+        >
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-3xl">📊</span>
+            <div className="text-left">
+              <p className="text-lg md:text-xl font-bold text-indigo-700">今週の分析結果</p>
+              <p className="text-sm text-gray-500">4教科の成長率を確認</p>
+            </div>
+          </div>
+        </Link>
 
         {/* Footer Info */}
         <div className="bg-white rounded-lg p-6 md:p-8 text-center shadow-md">

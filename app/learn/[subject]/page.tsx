@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ChatPane from '@/components/ChatPane';
-import ImagePane from '@/components/ImagePane';
+import LeftPanel from '@/components/LeftPanel';
 
 const subjectInfo: Record<string, { name: string; emoji: string }> = {
   math: { name: '算数', emoji: '🔢' },
@@ -38,9 +38,9 @@ export default function LearnPage({
       {/* Main Content - Chromebook (1280×800) optimized */}
       <div className="px-4 md:px-6 py-6 h-[calc(100vh-100px)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-          {/* Left: Image Pane - Desktop only */}
-          <div className="hidden md:flex flex-col overflow-hidden rounded-lg shadow">
-            <ImagePane subject={subject} />
+          {/* Left: LeftPanel（ヒント画像 or 分析結果） - Desktop only */}
+          <div className="hidden md:flex flex-col overflow-hidden rounded-lg shadow bg-white">
+            <LeftPanel subject={subject} />
           </div>
 
           {/* Right: Chat Pane - Full width on mobile */}
@@ -48,9 +48,9 @@ export default function LearnPage({
             <ChatPane subject={subject} />
           </div>
 
-          {/* Mobile: Image below chat */}
-          <div className="md:hidden col-span-1 overflow-hidden rounded-lg shadow">
-            <ImagePane subject={subject} />
+          {/* Mobile: LeftPanel below chat */}
+          <div className="md:hidden col-span-1 overflow-hidden rounded-lg shadow bg-white">
+            <LeftPanel subject={subject} />
           </div>
         </div>
       </div>
