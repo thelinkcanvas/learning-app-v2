@@ -9,12 +9,12 @@ const subjectInfo: Record<string, { name: string; emoji: string }> = {
   social: { name: '社会', emoji: '🌍' },
 };
 
-export default function LearnPage({
+export default async function LearnPage({
   params,
 }: {
-  params: { subject: string };
+  params: Promise<{ subject: string }>;
 }) {
-  const subject = params.subject;
+  const { subject } = await params;
   const info = subjectInfo[subject] || { name: '不明', emoji: '❓' };
 
   return (

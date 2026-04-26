@@ -18,11 +18,19 @@ export default function ChatPane({ subject }: ChatPaneProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to latest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Restore focus to input after loading completes (送信後・エラー後)
+  useEffect(() => {
+    if (!isLoading) {
+      inputRef.current?.focus();
+    }
+  }, [isLoading]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
@@ -114,12 +122,14 @@ export default function ChatPane({ subject }: ChatPaneProps) {
       {/* Input Area - Touch-friendly */}
       <div className="flex gap-3 mt-4">
         <input
+          ref={inputRef}
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="質問を入力..."
           disabled={isLoading}
+          autoFocus
           className="flex-1 px-4 py-3 md:py-4 text-base md:text-lg text-gray-900 placeholder:text-gray-500 border-2 border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 transition"
         />
         <button
