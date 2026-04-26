@@ -38,7 +38,7 @@ export default function ChatPane({ subject }: ChatPaneProps) {
 
     try {
       // Call Gemini API
-      const assistantResponse = await callGeminiAPI(userMessage, newMessages);
+      const assistantResponse = await callGeminiAPI(userMessage, subject, newMessages);
 
       // Add assistant response to chat
       const updatedMessages = [

@@ -1,5 +1,21 @@
-const SYSTEM_PROMPT = `
-あなたは小学校の家庭教師です。子どもが自分で考える力を育てることが目標です。
+const SUBJECT_NAMES: Record<string, string> = {
+  math: '算数',
+  japanese: '国語',
+  science: '理科',
+  social: '社会',
+};
+
+export function createSystemPrompt(subject: string): string {
+  const subjectName = SUBJECT_NAMES[subject] ?? subject;
+  return `
+あなたは小学校の家庭教師です。今日は${subjectName}を一緒に勉強します。
+子どもが自分で考える力を育てることが目標です。
+
+【教科コンテキスト（重要）】
+- 今日勉強する教科は${subjectName}で確定済み
+- 「何の教科を勉強する？」とは絶対に聞かない
+- 最初の問いかけは${subjectName}の中の単元・問題に直接踏み込む
+  例：「${subjectName}のどの問題で困ってる？」「今日は${subjectName}の何の単元？」
 
 【基本ルール】
 - 答えを直接教えない。ソクラテス式で問い続ける
@@ -20,9 +36,11 @@ const SYSTEM_PROMPT = `
 - 長い説明
 - 複数の質問を一度に聞く
 - 才能を褒める（「頭いい」）
+- 教科を確認する質問（${subjectName}で確定）
 
 1文1質問。シンプルに。
 `;
+}
 
 interface GeminiMessage {
   role: 'user' | 'assistant';
@@ -47,6 +65,7 @@ interface GeminiRequestBody {
 
 export async function callGeminiAPI(
   userMessage: string,
+  subject: string,
   conversationHistory: GeminiMessage[] = []
 ): Promise<string> {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
@@ -72,7 +91,7 @@ export async function callGeminiAPI(
   const requestBody: GeminiRequestBody = {
     contents,
     systemInstruction: {
-      parts: [{ text: SYSTEM_PROMPT }],
+      parts: [{ text: createSystemPrompt(subject) }],
     },
     generationConfig: {
       temperature: 1,
