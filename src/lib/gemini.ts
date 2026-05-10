@@ -1,3 +1,5 @@
+import { buildAdaptiveGuidance, type PromptContext } from './tutor-prompt';
+
 const SUBJECT_NAMES: Record<string, string> = {
   math: '算数',
   japanese: '国語',
@@ -5,9 +7,9 @@ const SUBJECT_NAMES: Record<string, string> = {
   social: '社会',
 };
 
-export function createSystemPrompt(subject: string): string {
+export function createSystemPrompt(subject: string, context?: PromptContext): string {
   const subjectName = SUBJECT_NAMES[subject] ?? subject;
-  return `
+  const basePrompt = `
 あなたは小学校の家庭教師です。今日は${subjectName}を一緒に勉強します。
 子どもが自分で考える力を育てることが目標です。
 
@@ -40,6 +42,8 @@ export function createSystemPrompt(subject: string): string {
 
 1文1質問。シンプルに。
 `;
+
+  return context ? basePrompt + buildAdaptiveGuidance(context) : basePrompt;
 }
 
 interface GeminiMessage {
@@ -91,7 +95,14 @@ export async function callGeminiAPI(
   const requestBody: GeminiRequestBody = {
     contents,
     systemInstruction: {
-      parts: [{ text: createSystemPrompt(subject) }],
+      parts: [
+        {
+          text: createSystemPrompt(subject, {
+            conversationHistory,
+            latestUserMessage: userMessage,
+          }),
+        },
+      ],
     },
     generationConfig: {
       temperature: 1,
